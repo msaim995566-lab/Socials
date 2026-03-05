@@ -1,0 +1,23 @@
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    {% if request.user.is_authenticated %}
+    <h2>Welcome {{request.user.email}}</h2>
+    <h2>First Name : {{request.user.first_name}}</h2>
+    <h2>Last Name : {{request.user.last_name}}</h2>
+    <a href="{% url "account_logout" %}">Logout</a>
+    {% else %}
+    <h2>You are not logged in</h2>
+    <a href="{% url "account_login" %}">Login</a>
+    <a href="{% provider_login_url "google" %}">Login with google</a>
+    <a href="{% provider_login_url "github" %}">Login with github</a>
+    <a href="{% provider_login_url "openid_connect" %}">Login with Linkedin</a>
+    {% endif %}
+</body>
+</html>
